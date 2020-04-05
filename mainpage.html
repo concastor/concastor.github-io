@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>PassWord Test</title>
+   </head>
+   <style>
+     .completeButton {
+        display: inline-block;
+        border-radius: 12px;
+        background-color: #4CAF50;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 220px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+        cursor: not-allowed
+      }
+
+      .button {
+        display: inline-block;
+        border-radius: 12px;
+        background-color: grey;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 220px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+      }
+
+      .disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      .button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+      }
+
+      .button span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+      }
+
+      .button:hover span {
+        padding-right: 25px;
+      }
+
+      .button:hover span:after {
+        opacity: 1;
+        right: 0;
+      }
+
+   </style>
+
+  <body onload="main()">
+
+    <h3>Create Bank Password</h3>
+    <button class="button" id = "createB" onClick="newUser.handleCreate('b')" > <span>Create Password </span></button>
+
+    <h3>Create email Password</h3>
+    <button class="button disabled" id = "createE" onClick="newUser.handleCreate('e')" disabled><span>Create Password </span> </button>
+
+    <h3>Create Shop Password</h3>
+    <button class="button disabled" id = "createS" onClick="newUser.handleCreate('s')" disabled> <span>Create Password </span></button>
+
+
+
+
+    <script>
+
+    class user {
+      constructor(){
+        this.bankAns = null
+        this.emailAns = null
+        this.shopAns = null
+      }
+
+      handleCreate(val){
+        //alexi function
+
+        if (val == "e"){
+          this.emailAns = "answer"
+          document.getElementById("createS").className = "button";
+          document.getElementById("createS").disabled = false;
+          document.getElementById("createE").className = "completeButton";
+          document.getElementById("createE").disabled = true;
+
+        } else if (val == "b"){
+          this.bankAns = "answer"
+
+          document.getElementById("createE").className = "button";
+          document.getElementById("createB").className = "completeButton";
+          document.getElementById("createE").disabled = false;
+          document.getElementById("createB").disabled = true;
+        } else {
+          this.shopAns = "answer"
+          document.getElementById("createS").className = "completeButton";
+          document.getElementById("createS").disabled = true;
+        }
+
+        console.log(this.emailAns)
+        console.log(this.bankAns)
+        console.log(this.shopAns)
+      };
+    } 
+
+    function main(){
+      newUser = new user()
+    }
+      
+    </script>
+  </body>
+</html>

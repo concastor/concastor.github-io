@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>PassWord Screen</title>
+   </head>
+   <style>
+
+      .button {
+        display: inline-block;
+        border-radius: 12px;
+        background-color: grey;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 220px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+      }
+
+      .disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      .button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+      }
+
+      .button span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+      }
+
+      .button:hover span {
+        padding-right: 25px;
+      }
+
+      .button:hover span:after {
+        opacity: 1;
+        right: 0;
+      }
+	  
+	  /* Style buttons */
+	.btn {
+	  background-color: Black; /* Black background */
+	  border: none; /* Remove borders */
+	  color: white; /* White text */
+	  padding: 12px 16px; /* Some padding */
+	  font-size: 16px; /* Set a font size */
+	  cursor: pointer; /* Mouse pointer on hover */
+	}
+
+	/* Change background on mouse-over */
+	.btn:hover {
+	  background-color: Grey;
+}
+
+   </style>
+
+  <body onload="main()">
+
+    <h2>Memorize this password (in order). You will be asked to replicate it in a later step!</h2>
+    
+    <script>
+		function main() {
+			window.photos = [
+				"about",
+				"binoculars",
+				"bookmark",
+				"cancel",
+				"checked",
+				"clock",
+				"contacts",
+				"edit",
+				"idea",
+				"key",
+				"music",
+				"padlock",
+				"plus",
+				"remove",
+				"search",
+				"settings",
+				"sun",
+				"support",
+				"trash-can",
+				"unavailable"
+			]
+			window.passLen = 5
+			window.answerKey = rndGen() //this will be taken by user.js to check for correctness
+			
+			displayIcons()
+		}
+		
+		/*generates answer key - each number corresponds to index in photos array*/
+		function rndGen() {
+			randos = []
+			
+			for (let i = 0; i < window.passLen; i++) {
+				num = Math.floor(Math.random() * 20) //between 0 and 19
+				randos.push(num)
+			}
+			return randos
+		}
+		
+		/*creates html elements*/
+		function displayIcons() {
+		
+			for (let i = 0; i < window.passLen; i++) {
+			
+				let btn = document.createElement("button")
+				
+				let picName = window.photos[window.answerKey[i]]
+				let filepath = "images/icons8-"+picName+"-50.png"
+				
+				let img = document.createElement("img")
+				img.setAttribute("src", filepath)
+				
+				btn.appendChild(img) //adds img to btn
+				document.body.appendChild(btn) //adds btn to html body
+			}
+
+			document.body.appendChild(document.createElement("p")) //line break
+
+			let doneBtn = document.createElement("button")
+			doneBtn.setAttribute("onclick", "window.close()")
+			doneBtn.innerHTML = "Done Memorizing!"
+			document.body.appendChild(doneBtn) //adds btn to html body
+			
+		}
+		
+	</script>
+	
+  </body>
+</html>

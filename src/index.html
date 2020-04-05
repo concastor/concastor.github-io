@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>PassWord Test</title>
+   </head>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <style>
+     .completeButton {
+        display: inline-block;
+        border-radius: 12px;
+        background-color: #4CAF50;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 220px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+        cursor: not-allowed
+      }
+
+      .button {
+        display: inline-block;
+        border-radius: 12px;
+        background-color: grey;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 220px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+      }
+
+      .disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      .button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+      }
+
+      .button span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+      }
+
+      .button:hover span {
+        padding-right: 25px;
+      }
+
+      .button:hover span:after {
+        opacity: 1;
+        right: 0;
+      }
+
+   </style>
+
+  <body onload="main()">
+
+    <h2>Part 1: Press a button and you'll be given a password, try to memorize them as best you can.</h2>
+    <div align = "center" style="border:1px solid black">
+    
+        <h3>Create Bank Password</h2>
+        <button class="button" id = "createB" onClick="newUser.handleCreate('b')" > <span>Create Password </span></button>
+
+        <h3>Create email Password</h2>
+        <button class="button disabled" id = "createE" onClick="newUser.handleCreate('e')" disabled><span>Create Password </span> </button>
+ 
+        <h3>Create Shop Password</h2>
+        <button class="button disabled" id = "createS" onClick="newUser.handleCreate('s')" disabled> <span>Create Password </span></button>
+    </div>
+
+    <h2>Part 2: Now Test your knowledge and enter the correct passwords</h2>
+    <div align = "center" style="border:1px solid black" disabled>
+    
+      <h3>Test email Password</h2>
+      <button class="button disabled" id = "testE" onClick="newUser.handleTest('e')" disabled><span>Test Password </span> </button>
+
+      <h3>Test Bank Password</h2>
+      <button class="button disabled" id = "testB" onClick="newUser.handleTest('b')" disabled> <span>Test Password </span></button>
+
+      <h3>Test Shop Password</h2>
+      <button class="button disabled" id = "testS" onClick="newUser.handleTest('s')" disabled> <span>Test Password </span></button>
+    </div>
+    <button class="button disabled" id = "finalB" onClick="newUser.handleFinish('s')" disabled> <span>Finish</span></button>
+
+    <script type="text/javascript" src="user.js"></script>
+  </body>
+</html>

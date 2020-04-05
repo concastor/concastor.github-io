@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>PassWord Screen</title>
+   </head>
+   <style>
+
+      .button {
+        display: inline-block;
+        border-radius: 12px;
+        background-color: grey;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 220px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+      }
+
+      .disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      .button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+      }
+
+      .button span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+      }
+
+      .button:hover span {
+        padding-right: 25px;
+      }
+
+      .button:hover span:after {
+        opacity: 1;
+        right: 0;
+      }
+	  
+	  /* Style buttons */
+	.btn {
+	  background-color: Black; /* Black background */
+	  border: none; /* Remove borders */
+	  color: white; /* White text */
+	  padding: 12px 16px; /* Some padding */
+	  font-size: 16px; /* Set a font size */
+	  cursor: pointer; /* Mouse pointer on hover */
+	}
+
+	/* Change background on mouse-over */
+	.btn:hover {
+	  background-color: Grey;
+}
+
+   </style>
+
+  <body onload="main()">
+
+    <h2>Enter your given password in order it was given to you!</h2>
+    
+    <script>
+		function main() {
+			window.photos = [
+				"about",
+				"binoculars",
+				"bookmark",
+				"cancel",
+				"checked",
+				"clock",
+				"contacts",
+				"edit",
+				"idea",
+				"key",
+				"music",
+				"padlock",
+				"plus",
+				"remove",
+				"search",
+				"settings",
+				"sun",
+				"support",
+				"trash-can",
+				"unavailable"
+			]
+			
+			var urlParams = new URLSearchParams(window.location.search);
+			let str_key = urlParams.get('num')
+			
+			window.answerKey = str_key.split("_")
+			
+			window.shuffledPhotos = JSON.parse(JSON.stringify(window.photos)) //make deep copy
+			window.shuffledPhotos = shuffle(shuffledPhotos)
+			
+			window.userAnswer = [] //init user answer
+			
+			displayIcons()
+		}
+		
+		//credit https://www.w3resource.com/javascript-exercises/javascript-array-exercise-17.php
+		//shuffles array
+		function shuffle(arra1) {
+			var ctr = arra1.length, temp, index;
+
+			// While there are elements in the array
+			while (ctr > 0) {
+				// Pick a random index
+				index = Math.floor(Math.random() * ctr);
+				// Decrease ctr by 1
+				ctr--;
+				// And swap the last element with it
+				temp = arra1[ctr];
+				arra1[ctr] = arra1[index];
+				arra1[index] = temp;
+			}
+			return arra1;
+		}
+		
+		/*creates html elements*/
+		function displayIcons() {
+		
+			for (let i = 0; i < window.photos.length; i++) {
+			
+				let btn = document.createElement("button")
+				
+				let picName = window.shuffledPhotos[i]
+				let filepath = "images/icons8-"+picName+"-50.png"
+				
+				btn.setAttribute("id", window.photos.indexOf(picName).toString())
+				btn.setAttribute("onclick", "userBtnClick(this.id)")
+				
+				let img = document.createElement("img")
+				img.setAttribute("src", filepath)
+				
+				btn.appendChild(img) //adds img to btn
+				document.body.appendChild(btn) //adds btn to html body
+				
+				//make every row only have 5 images
+				if ((i+1)%5 == 0) { //+1 to offset indexing starting at 0
+					document.body.appendChild(document.createElement("p")) //line break
+				}
+			}			
+		}
+		
+		/*records user click*/
+		function userBtnClick(id) {
+			window.userAnswer.push(id) //add id of button clicked to answer
+			
+			if (userAnswer.length == 5) {
+				checkAnswer()
+			}
+		}
+		
+		/*checks if answer is correct and returns success/failure*/
+		function checkAnswer() {
+			let currAnswer = JSON.stringify(window.userAnswer)
+			let answerKey = JSON.stringify(window.answerKey)
+			
+			if (currAnswer == answerKey) {
+				window.success = true
+				alert("That's correct! This window will now be closed.")
+			}
+			else {
+				window.success = false
+				alert("That's not correct. This window will now be closed.")
+			}
+			
+			window.close()
+		}
+		
+	</script>
+  </body>
+</html>

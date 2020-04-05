@@ -1,0 +1,21 @@
+{
+  "name": "3008-tester",
+  "version": "1.0.0",
+  "description": "testing password scheme for effectiveness",
+  "main": "Server.js",
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "express": "^4.17.1",
+    "papaparse": "^5.1.1",
+    "react": "^16.13.1",
+    "react-create-app": "^2.0.6",
+    "window": "^4.2.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm start",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
